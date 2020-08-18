@@ -37,16 +37,16 @@ public class RegistrationDao implements Serializable{
     public DTOuser checkLogin (String username, String password) throws SQLException, Exception{
         DTOuser userCheck = null;
         try {
-            String sql = "select roleID, statusID from user where username = ? and password = ?";
+            String sql = "select roleID, status from TBLuser where username = ? and password = ?";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
             rs = stm.executeQuery();
             if (rs.next()) {
-                String role = rs.getString("roleID");
-                String status = rs.getString("statusID");
-                userCheck = new DTOuser(role, status);
+                String roleID = rs.getString("roleID");
+                String status = rs.getString("status");
+                userCheck = new DTOuser(roleID, status);
             }
         } finally {
             closeConnection();
@@ -57,7 +57,7 @@ public class RegistrationDao implements Serializable{
     public String checkRole (String roleID) throws SQLException, Exception {
         String role = "fail";
         try {
-            String sql = "select role from role where roleID = ?";
+            String sql = "select role from TBLrole where roleID = ?";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, roleID);
@@ -71,20 +71,13 @@ public class RegistrationDao implements Serializable{
         return role;
     }
     
-    public String checkStatus (String statusID) throws SQLException, Exception {
-        String status = "fail";
+    public DTOuser getUserProfile (String userID) throws SQLException {
+        DTOuser user = null;
         try {
-            String sql = "select status from status where statusID = ?";
-            con = MyConnection.makeConnection();
-            stm = con.prepareStatement(sql);
-            stm.setString(1, statusID);
-            rs = stm.executeQuery();
-            if (rs.next()) {
-                status = rs.getString("status");
-            }
+            String sql = "select username, email, phone, photo from TBLuser where userID = ?";
         } finally {
             closeConnection();
         }
-        return status;
+        return user;
     }
 }

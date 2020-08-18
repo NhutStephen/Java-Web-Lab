@@ -14,11 +14,14 @@
     <body>
         <h1>Login</h1>
         <form action="MainController" method="post">
-            Username <input type="text" name="username" value=""> <br>
+            Username <input type="text" name="txtUsername" value=""> <br>
             <font color="red" style="font-style: italic">
             ${requestScope.INVALID.usernameError}
             </font>
-            Password <input type="password" name="password" value=""> <br>
+            Password <input type="password" name="txtPassword" value=""> <br>
+            <font color="red" style="font-style: italic">
+            ${requestScope.INVALID.passwordError}
+            </font>
             <input type='submit' name="action" value="Login">
             <input type='reset' value="Reset">
         </form>

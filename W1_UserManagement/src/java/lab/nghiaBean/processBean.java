@@ -113,7 +113,7 @@ public class processBean implements Serializable{
         RegistrationDao dao = new RegistrationDao();
         DTOuser roleUser = dao.checkLogin(username, password);
         
-        String status = dao.checkStatus(roleUser.getStatusID());
+        String status = roleUser.getStatus();
         String role = "fail";
         if (status.equals("active")) {
             role = dao.checkRole(roleUser.getRoleID());
