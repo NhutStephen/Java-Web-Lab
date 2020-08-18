@@ -17,8 +17,8 @@ public class DTOuser implements Serializable{
     private String email;
     private String phone;
     private String photo;
-    private String role;
-    private String status;
+    private String roleID;
+    private String statusID;
 
     public DTOuser(String username, String password, String email, String phone, String photo, String role, String status) {
         this.username = username;
@@ -26,13 +26,13 @@ public class DTOuser implements Serializable{
         this.email = email;
         this.phone = phone;
         this.photo = photo;
-        this.role = role;
-        this.status = status;
+        this.roleID = roleID;
+        this.statusID = statusID;
     }
 
-    public DTOuser(String role, String status) {
-        this.role = role;
-        this.status = status;
+    public DTOuser(String roleID, String statusID) {
+        this.roleID = roleID;
+        this.statusID = statusID;
     }
 
     public String getUsername() {
@@ -75,21 +75,20 @@ public class DTOuser implements Serializable{
         this.photo = photo;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleID() {
+        return roleID;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleID(String roleID) {
+        this.roleID = roleID;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusID() {
+        return statusID;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
     }
-    
-   
+
 }

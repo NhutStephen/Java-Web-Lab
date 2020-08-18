@@ -34,7 +34,7 @@ public class RegistrationDao implements Serializable{
         }
     }
      
-    private DTOuser checkLogin (String username, String password) throws SQLException, Exception{
+    public DTOuser checkLogin (String username, String password) throws SQLException, Exception{
         DTOuser userCheck = null;
         try {
             String sql = "select roleID, statusID from user where username = ? and password = ?";
@@ -54,7 +54,7 @@ public class RegistrationDao implements Serializable{
         return userCheck;
     }
     
-    private String checkRole (String roleID) throws SQLException, Exception {
+    public String checkRole (String roleID) throws SQLException, Exception {
         String role = "fail";
         try {
             String sql = "select role from role where roleID = ?";
@@ -71,7 +71,7 @@ public class RegistrationDao implements Serializable{
         return role;
     }
     
-    private String checkStatus (String statusID) throws SQLException, Exception {
+    public String checkStatus (String statusID) throws SQLException, Exception {
         String status = "fail";
         try {
             String sql = "select status from status where statusID = ?";
