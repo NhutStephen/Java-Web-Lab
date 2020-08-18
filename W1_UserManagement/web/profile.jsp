@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="col-md-2 row">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Back to HomePage"/>
         </div>
         <div class="container emp-profile">
             <form method="post">
@@ -50,6 +50,9 @@
                                     <div class="col-md-6">
                                         <p>0382575945</p>
                                     </div>
+                                </div>
+                                <div>
+                                    <input type="submit" class="profile-edit-btn" name="btnEdit" value="Save Profile"/>
                                 </div>
                             </div>
                         </div>
