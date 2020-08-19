@@ -9,9 +9,6 @@
         <link href="CSSContainer/profile.css" rel="stylesheet" media="all">
     </head>
     <body>
-        <div class="col-md-2 row">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-        </div>
         <div class="container emp-profile">
             <form method="post">
                 <div class="row">
@@ -31,24 +28,35 @@
                                     <div class="col-md-6">
                                         <label>User Name</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>Huynh Minh Nhut</p>
+                                    <div class="col-md-8">
+                                        <input data-test="name" type="text" class="input is-primary" name="name" value="Huynh Minh Nhut">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Email</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>nhuthm@dwarvesv.com</p>
+                                    <div class="col-md-8">
+                                        <input data-test="email" type="text" class="input is-primary" name="name" value="nhuthm@dwarvesv.com">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Phone</label>
                                     </div>
+                                    <div class="col-md-8">
+                                        <input data-test="number" type="text" class="input is-primary" name="name" value="0382575945">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
-                                        <p>0382575945</p>
+                                        <label hidden>Test</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="profile-edit-btn">
+                                            <input type="submit" class="profile-edit-btn" name="btnEdit" value="Save Profile"/></div>
+                                        <div class="profile-edit-btn">
+                                            <input type="submit" class="profile-edit-btn" value="Back to HomePage"/></div>
                                     </div>
                                 </div>
                             </div>
