@@ -17,13 +17,16 @@
             Username <input type="text" name="txtUsername" value=""> <br>
             <font color="red" style="font-style: italic">
             ${requestScope.INVALID.usernameError}
-            </font>
+            </font> <br>
             Password <input type="password" name="txtPassword" value=""> <br>
             <font color="red" style="font-style: italic">
             ${requestScope.INVALID.passwordError}
-            </font>
+            </font><br>
             <input type='submit' name="action" value="Login">
             <input type='reset' value="Reset">
         </form>
+        <font color="red">
+        ${requestScope.ERROR}
+        </font>
     </body>
 </html>

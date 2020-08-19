@@ -15,7 +15,8 @@ import lab.DTOs.DTOuser;
  *
  * @author nhoxq
  */
-public class processBean implements Serializable{
+public class processBean implements Serializable {
+
     private String username;
     private String password;
     private String email;
@@ -106,17 +107,17 @@ public class processBean implements Serializable{
     public void setDTOstatus(DTOstatus DTOstatus) {
         this.DTOstatus = DTOstatus;
     }
-    
+
 ///////////////////Process//////////////////////////////////////////////////////
-    
     public String checkLogin() throws Exception {
         RegistrationDao dao = new RegistrationDao();
         DTOuser roleUser = dao.checkLogin(username, password);
-        
-        String status = roleUser.getStatus();
         String role = "fail";
-        if (status.equals("active")) {
-            role = dao.checkRole(roleUser.getRoleID());
+        if (roleUser != null) {
+            String status = roleUser.getStatus();
+            if (status.equals("active")) {
+                role = dao.checkRole(roleUser.getRoleID());
+            }
         }
         return role;
     }
