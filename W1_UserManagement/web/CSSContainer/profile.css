@@ -12,9 +12,9 @@ body{
     text-align: center;
 }
 .profile-img img{
-    margin-top: -10%;
+    margin-top: -5px;
     width: 70%;
-    height: 120%;
+    height: 100%;
 }
 .profile-img .file {
     position: relative;
@@ -93,4 +93,8 @@ body{
 .profile-tab p{
     font-weight: 600;
     color: #0062cc;
+}
+
+.button-edit-save {
+    margin: -50px;
 }
