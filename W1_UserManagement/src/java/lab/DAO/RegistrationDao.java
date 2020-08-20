@@ -71,10 +71,20 @@ public class RegistrationDao implements Serializable{
         return role;
     }
     
-    public DTOuser getUserProfile (String userID) throws SQLException {
+    public DTOuser getUserProfile (String username) throws SQLException, ClassNotFoundException {
         DTOuser user = null;
         try {
-            String sql = "select username, email, phone, photo from TBLuser where userID = ?";
+            String sql = "select email, phone, photo from TBLuser where username = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String photo = rs.getString("photo");
+                user = new DTOuser(username, email, phone, photo);
+            }
         } finally {
             closeConnection();
         }

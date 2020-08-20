@@ -35,6 +35,13 @@ public class DTOuser implements Serializable{
         this.status = status;
     }
 
+    public DTOuser(String username, String email, String phone, String photo) {
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.photo = photo;
+    }
+
     public String getUsername() {
         return username;
     }

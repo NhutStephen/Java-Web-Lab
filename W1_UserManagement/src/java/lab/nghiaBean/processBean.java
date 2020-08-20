@@ -6,6 +6,7 @@
 package lab.nghiaBean;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import lab.DAO.RegistrationDao;
 import lab.DTOs.DTOrole;
 import lab.DTOs.DTOstatus;
@@ -17,16 +18,25 @@ import lab.DTOs.DTOuser;
  */
 public class processBean implements Serializable {
 
+    private String userID;
     private String username;
     private String password;
     private String email;
     private String phone;
     private String photo;
     private String roleID;
-    private String statusID;
+    private String status;
     private DTOuser user;
     private DTOrole DTOrole;
     private DTOstatus DTOstatus;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     public String getUsername() {
         return username;
@@ -76,12 +86,12 @@ public class processBean implements Serializable {
         this.roleID = roleID;
     }
 
-    public String getStatusID() {
-        return statusID;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusID(String statusID) {
-        this.statusID = statusID;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public DTOuser getUser() {
@@ -120,5 +130,10 @@ public class processBean implements Serializable {
             }
         }
         return role;
+    }
+    
+    public DTOuser loadProfile() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.getUserProfile(username);
     }
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lab.DTOs.DTOuser;
 import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
@@ -67,6 +68,7 @@ public class loginController extends HttpServlet {
                 bean.setUsername(username);
                 bean.setPassword(password);
                 String role = bean.checkLogin();
+                DTOuser welcome = bean.loadProfile();
                 if (role.equals("fail")) {
                     request.setAttribute("ERROR", "Wrong username or password");
                 } else if (role.equals("sub")) {
@@ -74,7 +76,7 @@ public class loginController extends HttpServlet {
                     request.setAttribute("WELCOME", "admin");
                 } else if (role.equals("admin")) {
                     url = USER;
-                    request.setAttribute("WELCOME", "user");
+                    request.setAttribute("WELCOME", welcome);
                 } else {
                     request.setAttribute("ERROR", "Wrong username or password");
                 }
