@@ -14,8 +14,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <img src="${requestScope.WELCOME.photo}" height="150px" width="150px"/>
+                            <div class="file btn btn-lg btn-primary">   
                                 Change Photo
                                 <input type="file" name="file"/>
                             </div>
@@ -26,18 +26,18 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>User Name</label>
+                                        <label style="font-weight: bold">User Name</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input data-test="name" type="text" class="input is-primary" name="name" value="Huynh Minh Nhut">
+                                        <label>${requestScope.WELCOME.username}</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Email</label>
+                                        <label style="font-weight: bold">Email</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input data-test="email" type="text" class="input is-primary" name="name" value="nhuthm@dwarvesv.com">
+                                        <label>${requestScope.WELCOME.email}</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -45,7 +45,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input data-test="number" type="text" class="input is-primary" name="name" value="0382575945">
+                                        <label>${requestScope.WELCOME.phone}</label>
                                     </div>
                                 </div>
                                 <div class="row">

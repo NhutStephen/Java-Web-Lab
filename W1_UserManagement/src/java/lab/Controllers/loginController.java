@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lab.DTOs.DTOuser;
 import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
@@ -22,9 +23,9 @@ import lab.nghiaBean.processBean;
  * @author nhoxq
  */
 public class loginController extends HttpServlet {
-    private static final String ERROR = "error.jsp";
-    private static final String USER = "user.jsp";
-    private static final String ADMIN = "admin.jsp";
+    private static final String ERROR = "login.jsp";
+    private static final String USER = "profile.jsp";
+    private static final String ADMIN = "search.jsp";
     private static final String INVALID = "login.jsp";
 
     /**
@@ -40,7 +41,7 @@ public class loginController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try (PrintWriter out = response.getWriter()) {
+        try {
             boolean valid = true;
             errorObj err = new errorObj();
             String username = request.getParameter("txtUsername");
@@ -67,14 +68,26 @@ public class loginController extends HttpServlet {
                 bean.setUsername(username);
                 bean.setPassword(password);
                 String role = bean.checkLogin();
-                if (role.equals("admin")) {
-                    
+                DTOuser welcome = bean.loadProfile();
+                if (role.equals("fail")) {
+                    request.setAttribute("ERROR", "Wrong username or password");
                 } else if (role.equals("sub")) {
-                    
+                    url = ADMIN;
+                    request.setAttribute("WELCOME", "admin");
+                } else if (role.equals("admin")) {
+                    url = USER;
+                    request.setAttribute("WELCOME", welcome);
                 } else {
-                    
+                    request.setAttribute("ERROR", "Wrong username or password");
                 }
+            } else {
+                request.setAttribute("INVALID", err);
             }
+        } catch (Exception e) {
+            request.setAttribute("ERROR", "Some Thing wrong in Login funtion! Please contact developer.");
+            log("Error at login: " + e.getMessage());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
