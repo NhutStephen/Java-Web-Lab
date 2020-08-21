@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author nhoxq
  */
 public class DTOuser implements Serializable{
+    private String userID;
     private String username;
     private String password;
     private String email;
@@ -19,16 +20,29 @@ public class DTOuser implements Serializable{
     private String photo;
     private String roleID;
     private String status;
-
-    public DTOuser(String username, String password, String email, String phone, String photo, String roleID, String status) {
+    private String role;
+    
+    
+    public DTOuser(String username, String email, String phone, String photo, String roleID, String status) {
         this.username = username;
-        this.password = password;
         this.email = email;
         this.phone = phone;
         this.photo = photo;
         this.roleID = roleID;
         this.status = status;
     }
+
+    public DTOuser(String userID, String username, String email, String phone, String photo, String roleID, String status) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.photo = photo;
+        this.roleID = roleID;
+        this.status = status;
+    }
+    
+    
 
     public DTOuser(String roleID, String status) {
         this.roleID = roleID;
@@ -40,6 +54,14 @@ public class DTOuser implements Serializable{
         this.email = email;
         this.phone = phone;
         this.photo = photo;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -96,6 +118,14 @@ public class DTOuser implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

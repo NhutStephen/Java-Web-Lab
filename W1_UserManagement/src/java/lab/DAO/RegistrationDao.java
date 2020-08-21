@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import lab.DButils.MyConnection;
+import lab.DTOs.DTOpromotion;
 import lab.DTOs.DTOuser;
 
 /**
@@ -89,5 +92,182 @@ public class RegistrationDao implements Serializable{
             closeConnection();
         }
         return user;
+    }
+    
+    public List<DTOuser> getListUser () throws SQLException, ClassNotFoundException {
+        List<DTOuser> listUser = null;
+        DTOuser user;
+        try {
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            listUser = new ArrayList<>();
+            while (rs.next()) {
+                String userID = rs.getString("userID");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String photo = rs.getString("photo");
+                String roleID = rs.getString("roleID");
+                String status = rs.getString("status");
+                user = new DTOuser(userID, username, email, phone, photo, roleID, status);
+                listUser.add(user);
+            }
+        } finally {
+            closeConnection();
+        }
+        return listUser;
+    }
+    
+    public List<DTOuser> findAllRole(String find) throws ClassNotFoundException, SQLException {
+        List<DTOuser> listUser = null;
+        DTOuser user;
+        try {
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + find + "%");
+            rs = stm.executeQuery();
+            listUser = new ArrayList<>();
+            while (rs.next()) {
+                String userID = rs.getString("userID");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String photo = rs.getString("photo");
+                String roleID = rs.getString("roleID");
+                String status = rs.getString("status");
+                user = new DTOuser(userID, username, email, phone, photo, roleID, status);
+                listUser.add(user);
+            }
+        } finally {
+            closeConnection();
+        }
+        return listUser;
+    }
+    
+    public List<DTOuser> findAdmin(String find) throws ClassNotFoundException, SQLException {
+        List<DTOuser> listUser = null;
+        DTOuser user;
+        try {
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? where role = '1'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + find + "%");
+            rs = stm.executeQuery();
+            listUser = new ArrayList<>();
+            while (rs.next()) {
+                String userID = rs.getString("userID");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String photo = rs.getString("photo");
+                String roleID = rs.getString("roleID");
+                String status = rs.getString("status");
+                user = new DTOuser(userID, username, email, phone, photo, roleID, status);
+                listUser.add(user);
+            }
+        } finally {
+            closeConnection();
+        }
+        return listUser;
+    }
+    
+    public List<DTOuser> findUser(String find) throws ClassNotFoundException, SQLException {
+        List<DTOuser> listUser = null;
+        DTOuser user;
+        try {
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? where role = '2'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + find + "%");
+            rs = stm.executeQuery();
+            listUser = new ArrayList<>();
+            while (rs.next()) {
+                String userID = rs.getString("userID");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String photo = rs.getString("photo");
+                String roleID = rs.getString("roleID");
+                String status = rs.getString("status");
+                user = new DTOuser(userID, username, email, phone, photo, roleID, status);
+                listUser.add(user);
+            }
+        } finally {
+            closeConnection();
+        }
+        return listUser;
+    }
+    
+    public boolean insertUser(DTOuser user) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "insert into TBluser (username, password, email, phone, photo, roleID, status) values (?,?,?,?,?,?,?)";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, user.getUsername());
+            stm.setString(2, user.getPassword());
+            stm.setString(3, user.getEmail());
+            stm.setString(4, user.getPhone());
+            stm.setString(5, user.getPhoto());
+            stm.setString(6, user.getRoleID());
+            stm.setString(7, "active");
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean deleteUser (String username) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "update TBLuser set status = 'inactive' where username = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean updateUser(DTOuser user) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "insert into TBluser (username, password, email, phone, roleID) values (?,?,?,?,?) where userID = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, user.getUsername());
+            stm.setString(2, user.getPassword());
+            stm.setString(3, user.getEmail());
+            stm.setString(4, user.getPhone());
+            stm.setString(5, user.getRoleID());
+            stm.setString(6, user.getUserID());
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean assignPromotion(DTOpromotion dtoPromotion) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "insert into TBLpromotion (userID, promotionID, rank, dateAssign, status) values (?,?,?,?,?)";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, dtoPromotion.getUserID());
+            stm.setString(2, dtoPromotion.getPromotionID());
+            stm.setString(3, dtoPromotion.getRank());
+            stm.setString(4, dtoPromotion.getDateAssign());
+            stm.setString(5, "active");
+        } finally {
+            closeConnection();
+        }
+        return check;
     }
 }

@@ -7,20 +7,22 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lab.DTOs.DTOrole;
 
 /**
  *
  * @author nhoxq
  */
-public class MainController extends HttpServlet {
+public class insertController extends HttpServlet {
     private static final String ERROR = "error.jsp";
-    
-    private static final String LOGIN = "loginController";
-    private static final String INSERT = "insertController";
+    private static final String INVALID = "insert.jsp";
+    private static final String SUCCESS = "search.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,19 +38,16 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Create a new account")) {
-                url = INSERT;
-            } else {
-                request.setAttribute("ERROR", "This action is not support");
-            }
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPassword");
+            String confirm = request.getParameter("txtConfirm");
+            String phone = request.getParameter("txtPhone");
+            
+            
         } catch (Exception e) {
-            request.setAttribute("ERROR", "Some Thing wrong in Main funtion! Please contact developer.");
-            log("Error at mainController: " + e.getMessage());
+            
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            
         }
     }
 

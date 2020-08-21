@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Admin</h1>
+        <input type="submit" value="Create a new account" name="action" />
     </body>
 </html>
