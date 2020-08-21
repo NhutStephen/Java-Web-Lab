@@ -7,9 +7,10 @@ package lab.nghiaBean;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 import lab.DAO.RegistrationDao;
+import lab.DTOs.DTOpromotion;
 import lab.DTOs.DTOrole;
-import lab.DTOs.DTOstatus;
 import lab.DTOs.DTOuser;
 
 /**
@@ -28,7 +29,10 @@ public class processBean implements Serializable {
     private String status;
     private DTOuser user;
     private DTOrole DTOrole;
-    private DTOstatus DTOstatus;
+    private DTOpromotion DTOpromotion;
+    
+    private String find;
+    
 
     public String getUserID() {
         return userID;
@@ -110,12 +114,20 @@ public class processBean implements Serializable {
         this.DTOrole = DTOrole;
     }
 
-    public DTOstatus getDTOstatus() {
-        return DTOstatus;
+    public DTOpromotion getDTOpromotion() {
+        return DTOpromotion;
     }
 
-    public void setDTOstatus(DTOstatus DTOstatus) {
-        this.DTOstatus = DTOstatus;
+    public void setDTOpromotion(DTOpromotion DTOpromotion) {
+        this.DTOpromotion = DTOpromotion;
+    }
+
+    public String getFind() {
+        return find;
+    }
+
+    public void setFind(String find) {
+        this.find = find;
     }
 
 ///////////////////Process//////////////////////////////////////////////////////
@@ -135,5 +147,50 @@ public class processBean implements Serializable {
     public DTOuser loadProfile() throws SQLException, ClassNotFoundException {
         RegistrationDao dao = new RegistrationDao();
         return dao.getUserProfile(username);
+    }
+    
+    public List<DTOuser> getAllUser() throws Exception {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOuser> listUser = dao.getListUser();
+        for (DTOuser dtoUser : listUser) {
+            dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+        }
+        return listUser;
+    }
+    
+/////////////////Search/////////////////////////////////////////////////////////
+
+    public List<DTOuser> findRoleAll() throws Exception {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOuser> listUser = dao.findAllRole(find);
+        for (DTOuser dtoUser : listUser) {
+            dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+        }
+        return listUser;
+    }
+    
+    public List<DTOuser> findAdmin() throws Exception {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOuser> listUser = dao.findAdmin(find);
+        for (DTOuser dtoUser : listUser) {
+            dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+        }
+        return listUser;
+    }
+    
+    public List<DTOuser> findUser() throws Exception {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOuser> listUser = dao.findUser(find);
+        for (DTOuser dtoUser : listUser) {
+            dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+        }
+        return listUser;
+    }
+    
+//////////////////////////////Insert user///////////////////////////////////////
+    
+    public boolean insertUser() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.insertUser(user);
     }
 }

@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package lab.DTOs;
+
+import java.io.Serializable;
+
+/**
+ *
+ * @author nhoxq
+ */
+public class DTOpromotion implements Serializable{
+    private String promotionID;
+    private String rank;
+    private String dateAssign;
+    private String status;
+    private String userID;
+
+    public DTOpromotion(String promotionID, String rank, String dateAssign, String status, String userID) {
+        this.promotionID = promotionID;
+        this.rank = rank;
+        this.dateAssign = dateAssign;
+        this.status = status;
+        this.userID = userID;
+    }
+
+    public String getPromotionID() {
+        return promotionID;
+    }
+
+    public void setPromotionID(String promotionID) {
+        this.promotionID = promotionID;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
+    public String getDateAssign() {
+        return dateAssign;
+    }
+
+    public void setDateAssign(String dateAssign) {
+        this.dateAssign = dateAssign;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    
+    
+}
