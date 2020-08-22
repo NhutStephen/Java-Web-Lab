@@ -193,4 +193,9 @@ public class processBean implements Serializable {
         RegistrationDao dao = new RegistrationDao();
         return dao.insertUser(user);
     }
+    
+    public boolean addAvatar() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.addAvatar(username, photo);
+    }
 }

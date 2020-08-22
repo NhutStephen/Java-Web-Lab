@@ -12,6 +12,14 @@
         <servlet-name>insertController</servlet-name>
         <servlet-class>lab.Controllers.insertController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addAvatar</servlet-name>
+        <servlet-class>lab.Controllers.addAvatarController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addPhotoController</servlet-name>
+        <servlet-class>lab.Controllers.addPhotoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>insertController</servlet-name>
         <url-pattern>/insertController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addAvatar</servlet-name>
+        <url-pattern>/addAvatar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addPhotoController</servlet-name>
+        <url-pattern>/addPhotoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

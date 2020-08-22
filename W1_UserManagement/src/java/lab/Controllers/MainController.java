@@ -21,6 +21,8 @@ public class MainController extends HttpServlet {
     
     private static final String LOGIN = "loginController";
     private static final String INSERT = "insertController";
+    private static final String INSERT_FORM = "insert.jsp";
+    private static final String ADD_AVATAR = "addAvatarController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,15 @@ public class MainController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
+            log(action);
             if (action.equals("Login")) {
                 url = LOGIN;
             } else if (action.equals("Create a new account")) {
+                url = INSERT_FORM;
+            } else if (action.equals("Create")) {
                 url = INSERT;
+            } else if (action.equals("uploadImage")){
+                url = ADD_AVATAR;
             } else {
                 request.setAttribute("ERROR", "This action is not support");
             }

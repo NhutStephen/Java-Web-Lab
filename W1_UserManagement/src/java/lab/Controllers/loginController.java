@@ -71,10 +71,10 @@ public class loginController extends HttpServlet {
                 DTOuser welcome = bean.loadProfile();
                 if (role.equals("fail")) {
                     request.setAttribute("ERROR", "Wrong username or password");
-                } else if (role.equals("sub")) {
+                } else if (role.equals("admin")) {
                     url = ADMIN;
                     request.setAttribute("WELCOME", "admin");
-                } else if (role.equals("admin")) {
+                } else if (role.equals("sub")) {
                     url = USER;
                     request.setAttribute("WELCOME", welcome);
                 } else {

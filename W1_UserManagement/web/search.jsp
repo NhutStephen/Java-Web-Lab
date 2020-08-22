@@ -13,6 +13,11 @@
     </head>
     <body>
         <h1>Admin</h1>
-        <input type="submit" value="Create a new account" name="action" />
+        <form action="MainController" method="POST">
+            <input type="submit" value="Create a new account" name="action" />
+        </form>
+        <font color="red" style="font-style: italic">
+            ${requestScope.NOTI}
+            </font>
     </body>
 </html>
