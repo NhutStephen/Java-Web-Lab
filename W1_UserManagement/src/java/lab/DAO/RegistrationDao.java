@@ -200,6 +200,8 @@ public class RegistrationDao implements Serializable{
         }
         return listUser;
     }
+
+/////////////////////////////insert user////////////////////////////////////////
     
     public boolean insertUser(DTOuser user) throws SQLException, ClassNotFoundException {
         boolean check = false;
@@ -221,6 +223,23 @@ public class RegistrationDao implements Serializable{
         return check;
     }
     
+    public boolean addAvatar(String username, String avatar) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "update TBLuser set photo = ? where username = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, avatar);
+            stm.setString(2, username);
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+/////////////////////////////////update user////////////////////////////////////    
+    
     public boolean deleteUser (String username) throws SQLException, ClassNotFoundException {
         boolean check = false;
         try {
@@ -238,7 +257,7 @@ public class RegistrationDao implements Serializable{
     public boolean updateUser(DTOuser user) throws SQLException, ClassNotFoundException {
         boolean check = false;
         try {
-            String sql = "insert into TBluser (username, password, email, phone, roleID) values (?,?,?,?,?) where userID = ?";
+            String sql = "update TBluser (username, password, email, phone, roleID) values (?,?,?,?,?) where userID = ?";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, user.getUsername());

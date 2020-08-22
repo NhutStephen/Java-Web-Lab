@@ -10,7 +10,15 @@ package lab.DTOs;
  * @author nhoxq
  */
 public class errorObj {
-    private String usernameError, passwordError, emailError, phoneError, photoError, limitPromotionError;
+    private String usernameError, passwordError, emailError, phoneError, photoError, limitPromotionError, confirmError;
+
+    public String getConfirmError() {
+        return confirmError;
+    }
+
+    public void setConfirmError(String confirmError) {
+        this.confirmError = confirmError;
+    }
 
     public String getUsernameError() {
         return usernameError;

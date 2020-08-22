@@ -21,7 +21,9 @@ public class DTOuser implements Serializable{
     private String roleID;
     private String status;
     private String role;
-    
+
+    public DTOuser() {
+    }
     
     public DTOuser(String username, String email, String phone, String photo, String roleID, String status) {
         this.username = username;
@@ -41,8 +43,6 @@ public class DTOuser implements Serializable{
         this.roleID = roleID;
         this.status = status;
     }
-    
-    
 
     public DTOuser(String roleID, String status) {
         this.roleID = roleID;
