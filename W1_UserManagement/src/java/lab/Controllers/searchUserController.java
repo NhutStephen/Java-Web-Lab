@@ -7,24 +7,22 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import lab.DTOs.DTOuser;
+import lab.nghiaBean.processBean;
 
 /**
  *
  * @author nhoxq
  */
-public class MainController extends HttpServlet {
+public class searchUserController extends HttpServlet {
+    private static final String SUCCESS = "search.jsp";
     private static final String ERROR = "error.jsp";
-    
-    private static final String LOGIN = "loginController";
-    private static final String INSERT = "insertController";
-    private static final String INSERT_FORM = "insert.jsp";
-    private static final String ADD_AVATAR = "addAvatarController";
-    
-    private static final String SEARCH = "searchUserController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,24 +38,27 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            log(action);
-            if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Create a new account")) {
-                url = INSERT_FORM;
-            } else if (action.equals("Create")) {
-                url = INSERT;
-            } else if (action.equals("uploadImage")){
-                url = ADD_AVATAR;
-            } else if (action.equals("Search User")) {
-                url = SEARCH;
-            } else {
-                request.setAttribute("ERROR", "This action is not support");
+            String role = request.getParameter("txtRoleID");
+            log("role = " + role);
+            String search = request.getParameter("txtSearchUser");
+            
+            if (search.trim().length() > 0) {
+                processBean bean = new processBean();
+                bean.setFind(search);
+                List<DTOuser> listUser;
+                if (role.equals("0")) {
+                    listUser = bean.findRoleAll();
+                } else if (role.equals("1")) {
+                    listUser = bean.findAdmin();
+                } else {
+                    listUser = bean.findUser();
+                }
+                request.setAttribute("LIST", listUser);
             }
+            url = SUCCESS;
         } catch (Exception e) {
-            request.setAttribute("ERROR", "Some Thing wrong in Main funtion! Please contact developer.");
-            log("Error at mainController: " + e.getMessage());
+            request.setAttribute("ERROR", "Some Thing wrong in Search funtion! Please contact developer.");
+            log("Error at searchUserController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -32,12 +32,12 @@
             ${requestScope.INVALID.confirmError}
             </font><br/>
             
-            <label>Email*</label>    <input style="margin-left: 1%" type="text" name="txtEmail" value="${param.txtUsername}"/>
+            <label>Email*</label>    <input style="margin-left: 1%" type="text" name="txtEmail" value="${param.txtEmail}"/>
             <font color="red" style="font-style: italic">
             ${requestScope.INVALID.emailError}
             </font><br/>
             
-            <label>Phone*</label>    <input style="margin-left: 1%" type="text" name="txtPhone" value="${param.txtUsername}"/>
+            <label>Phone*</label>    <input style="margin-left: 1%" type="text" name="txtPhone" value="${param.txtPhone}"/>
             <font color="red" style="font-style: italic">
             ${requestScope.INVALID.phoneError}
             </font><br/>

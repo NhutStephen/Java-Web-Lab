@@ -20,6 +20,14 @@
         <servlet-name>addPhotoController</servlet-name>
         <servlet-class>lab.Controllers.addPhotoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewAllUser</servlet-name>
+        <servlet-class>lab.Controllers.viewAllUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searchUserController</servlet-name>
+        <servlet-class>lab.Controllers.searchUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>addPhotoController</servlet-name>
         <url-pattern>/addPhotoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllUser</servlet-name>
+        <url-pattern>/viewAllUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchUserController</servlet-name>
+        <url-pattern>/searchUserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

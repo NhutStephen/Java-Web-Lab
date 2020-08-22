@@ -151,7 +151,7 @@ public class RegistrationDao implements Serializable{
         List<DTOuser> listUser = null;
         DTOuser user;
         try {
-            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? where role = '1'";
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? and roleID = '1'";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, "%" + find + "%");
@@ -178,7 +178,7 @@ public class RegistrationDao implements Serializable{
         List<DTOuser> listUser = null;
         DTOuser user;
         try {
-            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? where role = '2'";
+            String sql = "Select userID, username, email, phone, photo, roleID, status from TBLuser where username like ? and roleID = '2'";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, "%" + find + "%");
