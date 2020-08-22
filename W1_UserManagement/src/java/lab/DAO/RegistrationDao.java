@@ -238,6 +238,23 @@ public class RegistrationDao implements Serializable{
         return check;
     }
     
+    public String checkUserExist (String username) throws SQLException, ClassNotFoundException {
+        String check = null;
+        try {
+            String sql = "select username from TBLuser where username = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                check = rs.getString("username");
+            }
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
 /////////////////////////////////update user////////////////////////////////////    
     
     public boolean deleteUser (String username) throws SQLException, ClassNotFoundException {

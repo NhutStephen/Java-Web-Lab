@@ -52,11 +52,17 @@ public class insertController extends HttpServlet {
             String roleID = request.getParameter("txtRoleID");
             String avatar = "image/person.jpg";
             
+            processBean bean = new processBean();
+            bean.setUsername(username);
+                    
             errorObj err = new errorObj();
             boolean valid = true;
 
             if (username.trim().length() == 0) {
                 err.setUsernameError("Username can not be blank!");
+                valid = false;
+            } else if (bean.checkUserExist()) {
+                err.setUsernameError("Username is existed!");
                 valid = false;
             }
             if (password.trim().length() == 0) {
@@ -92,7 +98,7 @@ public class insertController extends HttpServlet {
                 user.setPhoto(avatar);
                 user.setRoleID(roleID);
 
-                processBean bean = new processBean();
+                
                 bean.setUser(user);
                 boolean check = bean.insertUser();
 
