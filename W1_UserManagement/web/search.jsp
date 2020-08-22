@@ -25,7 +25,9 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="login100-form-btn">
-                                <button type="button" class="form-control">Insert new user</button>
+                                <form action="MainController" method="POST">
+                                    <button type="submit" class="form-control" value="Create a new account" name="action">Insert new user</button>
+                                </form>
                             </div><br/>
                             <div class="search-box">
                                 <i class="material-icons">&#xE8B6;</i>
