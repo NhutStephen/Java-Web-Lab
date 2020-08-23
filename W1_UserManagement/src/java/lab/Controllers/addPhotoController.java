@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lab.DTOs.DTOuser;
 import lab.nghiaBean.processBean;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -115,6 +116,8 @@ public class addPhotoController extends HttpServlet {
                         boolean check = bean.addAvatar();
                         if (check) {
                             url = SUCCESS;
+                            List<DTOuser> listUser = bean.getAllUser();
+                            request.setAttribute("LIST", listUser);
                             session.removeAttribute("USERNAME");
                         }
                     }

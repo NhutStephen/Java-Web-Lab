@@ -7,6 +7,7 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -73,7 +74,9 @@ public class loginController extends HttpServlet {
                     request.setAttribute("ERROR", "Wrong username or password");
                 } else if (role.equals("admin")) {
                     url = ADMIN;
-                    request.setAttribute("WELCOME", "admin");
+                    List<DTOuser> listUser = bean.getAllUser();
+                    request.setAttribute("WELCOME", welcome);
+                    request.setAttribute("LIST", listUser);
                 } else if (role.equals("sub")) {
                     url = USER;
                     request.setAttribute("WELCOME", welcome);
