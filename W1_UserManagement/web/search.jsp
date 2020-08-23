@@ -61,56 +61,61 @@
                             </div>
                         </div>
                     </div>
+                    <div>                   
 
-                    <%
-                        List<DTOuser> listUser = (List<DTOuser>) request.getAttribute("LIST");
-                        if (listUser != null) {
-                            //if (listUser.size() > 0) {
-
-                    %>
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Photo</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <%                            for (DTOuser user : listUser) {
-                        %>
-                        <tbody>
-                            <tr>
-                                <td><%= user.getUserID()%></td>
-                                <td><image src="<%= user.getPhoto()%>" width="50px" height="50px"/></td>
-                                <td><%= user.getUsername()%></td>
-                                <td><%= user.getEmail()%></td>
-                                <td><%= user.getPhone()%></td>
-                                <td><%= user.getRole()%></td>
-                                <td><%= user.getStatus()%></td>
-                                <td>
-                                    
-                                    <form action="MainController" method="POST">
-                                        <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
-                                        <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                        <input type="submit" name="action" value="Delete">
-                                    </form>
-                                    <form action="MainController" method="POST">
-                                        <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
-                                        <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                        <input type="submit" name="action" value="Edit User"/>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
                         <%
-                            }
+                            List<DTOuser> listUser = (List<DTOuser>) request.getAttribute("LIST");
+                            if (listUser != null) {
+                                //if (listUser.size() > 0) {
+
                         %>
-                    </table>
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Photo</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <%                            for (DTOuser user : listUser) {
+                            %>
+                            <tbody>
+                                <tr>
+                                    <td><%= user.getUserID()%></td>
+                                    <td><image src="<%= user.getPhoto()%>" width="50px" height="50px"/></td>
+                                    <td><%= user.getUsername()%></td>
+                                    <td><%= user.getEmail()%></td>
+                                    <td><%= user.getPhone()%></td>
+                                    <td><%= user.getRole()%></td>
+                                    <td><%= user.getStatus()%></td>
+                                    <td>
+
+                                        <form action="MainController" method="POST">
+                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
+                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
+                                            <input type="submit" name="action" value="Delete">
+                                        </form>
+                                        <form action="MainController" method="POST">
+                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
+                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
+                                            <input type="submit" name="action" value="Edit User"/>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <%
+                                }
+                            %>
+                        </table>
+                        <div class="container-login100-form-btn">
+                            <input class="login100-form-btn" type='submit' value="Logout" name="action">
+                        </div>
+                    </div> 
                     <%
                         //}
                     } else {
