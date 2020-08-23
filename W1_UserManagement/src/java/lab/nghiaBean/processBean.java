@@ -150,6 +150,12 @@ public class processBean implements Serializable {
         List<DTOuser> listUser = dao.getListUser();
         for (DTOuser dtoUser : listUser) {
             dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+            String check = dao.checkAssignPromotion(dtoUser.getUserID());
+            if (check == null) {
+                dtoUser.setPromotionStatus("Free");
+            } else {
+                dtoUser.setPromotionStatus("Joining");
+            }
         }
         return listUser;
     }
@@ -161,6 +167,12 @@ public class processBean implements Serializable {
         List<DTOuser> listUser = dao.findAllRole(find);
         for (DTOuser dtoUser : listUser) {
             dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+            String check = dao.checkAssignPromotion(dtoUser.getUserID());
+            if (check == null) {
+                dtoUser.setPromotionStatus("Free");
+            } else {
+                dtoUser.setPromotionStatus("Joining");
+            }
         }
         return listUser;
     }
@@ -170,6 +182,12 @@ public class processBean implements Serializable {
         List<DTOuser> listUser = dao.findAdmin(find);
         for (DTOuser dtoUser : listUser) {
             dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+            String check = dao.checkAssignPromotion(dtoUser.getUserID());
+            if (check == null) {
+                dtoUser.setPromotionStatus("Free");
+            } else {
+                dtoUser.setPromotionStatus("Joining");
+            }
         }
         return listUser;
     }
@@ -179,6 +197,12 @@ public class processBean implements Serializable {
         List<DTOuser> listUser = dao.findUser(find);
         for (DTOuser dtoUser : listUser) {
             dtoUser.setRole(dao.checkRole(dtoUser.getRoleID()));
+            String check = dao.checkAssignPromotion(dtoUser.getUserID());
+            if (check == null) {
+                dtoUser.setPromotionStatus("Free");
+            } else {
+                dtoUser.setPromotionStatus("Joining");
+            }
         }
         return listUser;
     }
@@ -215,5 +239,38 @@ public class processBean implements Serializable {
     public DTOuser getUsertoUPdate() throws ClassNotFoundException, SQLException {
         RegistrationDao dao = new RegistrationDao();
         return dao.getUsertoUpdate(username);
+    }
+    
+///////////////////////////promotion////////////////////////////////////////////
+    
+    public boolean assignPromotion() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.assignPromotion(DTOpromotion);
+    }
+    
+    public String takeUserID() throws ClassNotFoundException, SQLException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.getUserID(username);
+    }
+    
+    public List<DTOpromotion> loadPromotionList() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOpromotion> list = dao.loadPromotionList();
+        for (DTOpromotion dto : list) {
+            dto.setUsername(dao.takeUsername(dto.getUserID()));
+        }
+        return list;
+    }
+    
+    public boolean removePromo() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.removePromotion(userID);
+    }
+    
+    public DTOpromotion getPromotion() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        DTOpromotion dto = dao.getPromotion(userID);
+        dto.setUsername(dao.takeUsername(userID));
+        return dto;
     }
 }

@@ -304,6 +304,8 @@ public class RegistrationDao implements Serializable{
         return user;
     }
     
+///////////////////////////////////////assign promotion list////////////////////
+    
     public boolean assignPromotion(DTOpromotion dtoPromotion) throws SQLException, ClassNotFoundException {
         boolean check = false;
         try {
@@ -314,10 +316,129 @@ public class RegistrationDao implements Serializable{
             stm.setString(2, dtoPromotion.getPromotionID());
             stm.setString(3, dtoPromotion.getRank());
             stm.setString(4, dtoPromotion.getDateAssign());
-            stm.setString(5, "active");
+            stm.setString(5, dtoPromotion.getStatus());
+            check = stm.executeUpdate() > 0;
         } finally {
             closeConnection();
         }
         return check;
+    }
+    
+    public String checkAssignPromotion(String userID) throws SQLException, ClassNotFoundException {
+        String check = null;
+        try {
+            String sql = "select promotionID from TBLpromotion where userID = ? and status = 'joining'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, userID);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                check = rs.getString("promotionID");
+            }
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public String getUserID (String username) throws ClassNotFoundException, SQLException {
+        String userID = null;
+        try {
+            String sql = "select userID from TBLuser where username = ? and status = 'active'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                userID = rs.getString("userID");
+            }
+        } finally {
+            closeConnection();
+        }
+        return userID;
+    }
+    
+    public String takeUsername (String userID) throws ClassNotFoundException, SQLException {
+        String username = null;
+        try {
+            String sql = "select username from TBLuser where userID = ? and status = 'active'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, userID);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                username = rs.getString("username");
+            }
+        } finally {
+            closeConnection();
+        }
+        return username;
+    }
+    
+    public boolean removePromotion (String userID) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        try {
+            String sql = "update TBLpromotion set status = 'removed' where userID = ? and status = 'joining'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, userID);
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean updatePromotion (String userID, String rank) throws ClassNotFoundException, SQLException {
+        boolean check = false;
+        try {
+            String sql = "update TBLpromotion set rank = ? where userID = ? and status = 'joining'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, rank);
+            stm.setString(2, userID);
+            check = stm.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public List<DTOpromotion> loadPromotionList () throws SQLException, ClassNotFoundException {
+        List<DTOpromotion> listPromotion = new ArrayList<>();
+        try {
+            String sql = "select userID, rank, dateAssign from TBLpromotion where status = 'joining'";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                DTOpromotion dto = new DTOpromotion();
+                dto.setUserID(rs.getString("userID"));
+                dto.setRank(rs.getString("rank"));
+                dto.setDateAssign(rs.getString("dateAssign"));
+                listPromotion.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return listPromotion;
+    }
+    
+    public DTOpromotion getPromotion(String userID) throws SQLException, ClassNotFoundException {
+        DTOpromotion dto = new DTOpromotion();
+        try {
+            String sql = "select rank from TBLpromotion where userID = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, userID);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                dto.setUserID(userID);
+                dto.setRank(rs.getString("rank"));
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
     }
 }

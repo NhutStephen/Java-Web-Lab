@@ -7,29 +7,24 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lab.DTOs.DTOpromotion;
+import lab.DTOs.DTOuser;
+import lab.nghiaBean.processBean;
 
-public class MainController extends HttpServlet {
-
+/**
+ *
+ * @author nhoxq
+ */
+public class assignPromotionListController extends HttpServlet {
     private static final String ERROR = "error.jsp";
-
-    private static final String LOGIN = "loginController";
-    private static final String INSERT = "insertController";
-    private static final String INSERT_FORM = "insert.jsp";
-    private static final String ADD_AVATAR = "addAvatarController";
-
-    private static final String SEARCH = "searchUserController";
-    private static final String DELETE_USER = "deleteUserController";
-    private static final String UPDATE_USER = "updateController";
-
-    private static final String ASSIGN_PROMOTION = "assignPromotionListController";
-    private static final String LOAD_PROMOTION = "loadPromotionListController";
-    private static final String REMOVE_PROMOTION = "removePromotionListController";
-    private static final String EDIT_PROMOTION = "editPromotionListController";
-
+    private static final String SUCCESS = "search.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,36 +39,32 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            log(action);
-            if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Create a new account")) {
-                url = INSERT_FORM;
-            } else if (action.equals("Create")) {
-                url = INSERT;
-            } else if (action.equals("uploadImage")) {
-                url = ADD_AVATAR;
-            } else if (action.equals("Search User")) {
-                url = SEARCH;
-            } else if (action.equals("Delete User")) {
-                url = DELETE_USER;
-            } else if (action.equals("Assign to Promotion")) {
-                url = ASSIGN_PROMOTION;
-            } else if (action.equals("Edit User") || action.equals("Update User")) {
-                url = UPDATE_USER;
-            } else if (action.equals("LoadPromotionList")) {
-                url = LOAD_PROMOTION;
-            } else if (action.equals("Remove")) {
-                url = REMOVE_PROMOTION;
-            } else if (action.equals("Edit Promotion") || action.equals("Edit")) {
-                url = EDIT_PROMOTION;
+            String username = request.getParameter("txtUsername");
+            processBean bean = new processBean();
+            bean.setUsername(username);
+            String userID = bean.takeUserID();
+            String promotionID = "pro1";
+            String rank = "5.0";
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String dateAssign = formatter.format(date);
+            String status = "joining";
+
+            DTOpromotion dto = new DTOpromotion(promotionID, rank, dateAssign, status, userID);
+            bean.setDTOpromotion(dto);
+            boolean check = bean.assignPromotion();
+            if (check) {
+                url = SUCCESS;
+                List<DTOuser> listUser = bean.getAllUser();
+                request.setAttribute("LIST", listUser);
             } else {
-                request.setAttribute("ERROR", "This action is not support");
+                log("Error at bean.assignPromotion");
             }
+
         } catch (Exception e) {
-            request.setAttribute("ERROR", "Some Thing wrong in Main funtion! Please contact developer.");
-            log("Error at mainController: " + e.getMessage());
+            request.setAttribute("ERROR", "Some Thing wrong in Assign promotion funtion! Please contact developer.");
+            log("Error at assignPromotionList: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

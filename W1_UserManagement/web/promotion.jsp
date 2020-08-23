@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="lab.DTOs.DTOpromotion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,89 +25,54 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <%
+                                    List<DTOpromotion> list = (List<DTOpromotion>) request.getAttribute("LIST_PROMO");
+                                    if (list != null) {
+
+                                %>
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Project Name</th>
-                                            <th>Employer</th>
-                                            <th>Awards</th>
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Rank</th>
+                                            <th>Date assign</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <%                                        for (DTOpromotion dto : list) {
+                                    %>
                                     <tbody>
                                         <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Project Name</th>
-                                            <th>Employer</th>
-                                            <th>Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
+                                            <td><%= dto.getUserID()%></td>
+                                            <td><%= dto.getUsername()%></td>
+                                            <td><%= dto.getRank()%></td>
+                                            <td><%= dto.getDateAssign()%></td>
+                                            <td>
+                                                <form action="MainController" method="POST">
+                                                    <input type="hidden" name="txtUserID" value="<%= dto.getUserID()%>"/>
+                                                    <input type="submit" name="action" value="Remove">
+                                                </form>
+
+                                                <form action="MainController" method="POST">
+                                                    <input type="hidden" name="txtUserID" value="<%= dto.getUserID()%>"/>
+                                                    <input type="submit" name="action" value="Edit Promotion"/>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </tbody>
+                                    <%
+                                        }
+                                    %>    
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Contest Name</th>
-                                            <th>Date</th>
-                                            <th>Award Position</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <%
+                            } else {
+                            %>
+                            <label style="font-style: italic; color: red; font-weight: bold">No record Found!</label>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>

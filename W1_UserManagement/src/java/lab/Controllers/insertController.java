@@ -75,12 +75,23 @@ public class insertController extends HttpServlet {
                 err.setConfirmError("Those password didn't match.Try again.");
                 valid = false;
             }
+            String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
             if (email.trim().length() == 0) {
                 err.setEmailError("Email can not be blank!");
                 valid = false;
+            } else if (email.matches(regex) == false) {
+                err.setEmailError("Email is not valid!");
+                valid = false;
             }
+            String phoneRegex = "^\\d{10}$";
             if (phone.trim().length() == 0) {
                 err.setPhoneError("Phone can not be blank!");
+                valid = false;
+            } else if (phone.trim().length() > 13) {
+                err.setPhoneError("Phone length are not valid!");
+                valid = false;
+            } else if (phone.matches(phoneRegex) == false) {
+                err.setPhoneError("Phone is not valid!");
                 valid = false;
             }
 

@@ -6,7 +6,6 @@
 package lab.Controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import lab.DTOs.DTOuser;
+import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
 /**
@@ -43,31 +44,58 @@ public class updateController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
+            HttpSession session = request.getSession();
             processBean bean = new processBean();
             if (action.equals("Edit User")) {
                 String username = request.getParameter("txtUsername");
                 log("username = " + username);
                 bean.setUsername(username);
                 DTOuser user = bean.getUsertoUPdate();
-                request.setAttribute("USER", user);
+                session.setAttribute("USER", user);
                 url = FORM;
             } else if (action.equals("Update User")) {
                 String username = request.getParameter("txtUsername");
                 String email = request.getParameter("txtEmail");
                 String phone = request.getParameter("txtPhone");
                 String roleID = request.getParameter("txtRoleID");
-                
-                
-                
-                bean.setUsername(username);
-                bean.setEmail(email);
-                bean.setPhone(phone);
-                bean.setRoleID(roleID);
-                boolean check = bean.updateUser();
-                if (check) {
-                    url = SUCCESS;
-                    List<DTOuser> listUser = bean.getAllUser();
-                    request.setAttribute("LIST", listUser);
+
+                boolean valid = true;
+                errorObj err = new errorObj();
+                String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+                if (email.trim().length() == 0) {
+                    err.setEmailError("Email can not be blank!");
+                    valid = false;
+                } else if (email.matches(regex) == false) {
+                    err.setEmailError("Email is not valid!");
+                    valid = false;
+                }
+                String phoneRegex = "^\\d{10}$";
+                if (phone.trim().length() == 0) {
+                    err.setPhoneError("Phone can not be blank!");
+                    valid = false;
+                } else if (phone.trim().length() > 13) {
+                    err.setPhoneError("Phone length are not valid!");
+                    valid = false;
+                } else if (phone.matches(phoneRegex) == false) {
+                    err.setPhoneError("Phone is not valid!");
+                    valid = false;
+                }
+
+                if (valid) {
+                    bean.setUsername(username);
+                    bean.setEmail(email);
+                    bean.setPhone(phone);
+                    bean.setRoleID(roleID);
+                    boolean check = bean.updateUser();
+                    if (check) {
+                        url = SUCCESS;
+                        List<DTOuser> listUser = bean.getAllUser();
+                        session.removeAttribute("USER");
+                        request.setAttribute("LIST", listUser);
+                    }
+                } else {
+                    request.setAttribute("INVALID", err);
+                    url = FORM;
                 }
             }
 

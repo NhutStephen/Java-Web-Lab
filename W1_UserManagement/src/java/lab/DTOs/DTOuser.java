@@ -16,6 +16,7 @@ public class DTOuser implements Serializable{
     private String photo;
     private String roleID;
     private String status;
+    private String promotionStatus;
     private String role;
 
     public DTOuser() {
@@ -122,6 +123,14 @@ public class DTOuser implements Serializable{
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPromotionStatus() {
+        return promotionStatus;
+    }
+
+    public void setPromotionStatus(String promotionStatus) {
+        this.promotionStatus = promotionStatus;
     }
 
 }

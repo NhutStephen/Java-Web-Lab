@@ -36,6 +36,26 @@
         <servlet-name>updateController</servlet-name>
         <servlet-class>lab.Controllers.updateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>assignPromotionList</servlet-name>
+        <servlet-class>lab.Controllers.assignPromotionList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>assignPromotionListController</servlet-name>
+        <servlet-class>lab.Controllers.assignPromotionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadPromotionListController</servlet-name>
+        <servlet-class>lab.Controllers.loadPromotionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>removePromotionListController</servlet-name>
+        <servlet-class>lab.Controllers.removePromotionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editPromotionListController</servlet-name>
+        <servlet-class>lab.Controllers.editPromotionListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -71,6 +91,26 @@
     <servlet-mapping>
         <servlet-name>updateController</servlet-name>
         <url-pattern>/updateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>assignPromotionList</servlet-name>
+        <url-pattern>/assignPromotionList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>assignPromotionListController</servlet-name>
+        <url-pattern>/assignPromotionListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadPromotionListController</servlet-name>
+        <url-pattern>/loadPromotionListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removePromotionListController</servlet-name>
+        <url-pattern>/removePromotionListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editPromotionListController</servlet-name>
+        <url-pattern>/editPromotionListController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
