@@ -7,10 +7,6 @@ package lab.DTOs;
 
 import java.io.Serializable;
 
-/**
- *
- * @author nhoxq
- */
 public class DTOpromotion implements Serializable{
     private String promotionID;
     private String rank;

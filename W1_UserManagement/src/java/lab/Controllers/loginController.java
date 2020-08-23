@@ -19,10 +19,6 @@ import lab.DTOs.DTOuser;
 import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
-/**
- *
- * @author nhoxq
- */
 public class loginController extends HttpServlet {
     private static final String ERROR = "login.jsp";
     private static final String USER = "profile.jsp";

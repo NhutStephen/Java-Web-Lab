@@ -1,9 +1,3 @@
-<%-- 
-    Document   : error
-    Created on : Aug 18, 2020, 1:14:25 PM
-    Author     : nhoxq
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

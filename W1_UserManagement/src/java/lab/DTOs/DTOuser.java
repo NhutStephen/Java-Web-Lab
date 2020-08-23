@@ -7,10 +7,6 @@ package lab.DTOs;
 
 import java.io.Serializable;
 
-/**
- *
- * @author nhoxq
- */
 public class DTOuser implements Serializable{
     private String userID;
     private String username;

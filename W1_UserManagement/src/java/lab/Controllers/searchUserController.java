@@ -16,10 +16,6 @@ import javax.servlet.http.HttpSession;
 import lab.DTOs.DTOuser;
 import lab.nghiaBean.processBean;
 
-/**
- *
- * @author nhoxq
- */
 public class searchUserController extends HttpServlet {
     private static final String SUCCESS = "search.jsp";
     private static final String ERROR = "error.jsp";

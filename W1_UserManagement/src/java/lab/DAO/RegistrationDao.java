@@ -16,10 +16,6 @@ import lab.DButils.MyConnection;
 import lab.DTOs.DTOpromotion;
 import lab.DTOs.DTOuser;
 
-/**
- *
- * @author nhoxq
- */
 public class RegistrationDao implements Serializable{
     private Connection con = null;
     private PreparedStatement stm = null;

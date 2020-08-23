@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Aug 17, 2020, 1:40:11 PM
-    Author     : nhoxq
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

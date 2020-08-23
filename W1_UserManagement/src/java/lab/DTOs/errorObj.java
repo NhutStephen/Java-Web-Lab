@@ -5,10 +5,6 @@
  */
 package lab.DTOs;
 
-/**
- *
- * @author nhoxq
- */
 public class errorObj {
     private String usernameError, passwordError, emailError, phoneError, photoError, limitPromotionError, confirmError;
 

@@ -20,10 +20,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-/**
- *
- * @author nhoxq
- */
 public class addPhotoController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "search.jsp";
