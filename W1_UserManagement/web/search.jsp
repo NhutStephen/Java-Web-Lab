@@ -106,20 +106,20 @@
                                             } else if (user.getPromotionStatus().equals("Joining")) {
                                                 type = "hidden";
                                             }
-                                            
+
                                         %>
                                         <form action="MainController" method="POST">
                                             <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
                                             <input type="<%= type1%>" name="action" value="Delete User">
                                         </form>
-                                            
+
                                         <form action="MainController" method="POST">
                                             <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
                                             <input type="<%= type1%>" name="action" value="Edit User"/>
                                         </form>
-                                        
+
                                         <form action="MainController" method="POST">
                                             <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
@@ -132,11 +132,8 @@
                                 }
                             %>
                         </table>
-                        <div class="container-login100-form-btn">
-                            <input class="login100-form-btn" type='submit' value="Logout" name="action">
-                        </div>
                         <div>
-                            <a href="MainController?action=LoadPromotionList">Go to your promotion's list in here</a>
+
                         </div>
                     </div> 
                     <%
@@ -148,6 +145,10 @@
                         }
                     %>
                 </div>
+                <form action="MainController" method="POST">
+                    <input class="login100-form-btn" type='submit' value="Logout" name="action">
+                </form>
+                <a href="MainController?action=LoadPromotionList">Go to your promotion's list in here</a>
             </div>
         </div>
     </body>

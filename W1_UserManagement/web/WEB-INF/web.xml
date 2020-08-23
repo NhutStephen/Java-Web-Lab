@@ -56,6 +56,10 @@
         <servlet-name>editPromotionListController</servlet-name>
         <servlet-class>lab.Controllers.editPromotionListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logoutController</servlet-name>
+        <servlet-class>lab.Controllers.logoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>editPromotionListController</servlet-name>
         <url-pattern>/editPromotionListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutController</servlet-name>
+        <url-pattern>/logoutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

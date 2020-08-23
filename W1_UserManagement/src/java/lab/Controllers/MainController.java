@@ -17,6 +17,7 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
 
     private static final String LOGIN = "loginController";
+    private static final String lOGOUT = "logoutController";
     private static final String INSERT = "insertController";
     private static final String INSERT_FORM = "insert.jsp";
     private static final String ADD_AVATAR = "addAvatarController";
@@ -68,6 +69,8 @@ public class MainController extends HttpServlet {
                 url = REMOVE_PROMOTION;
             } else if (action.equals("Edit Promotion") || action.equals("Edit")) {
                 url = EDIT_PROMOTION;
+            } else if (action.equals("Logout")) {
+                url = lOGOUT;
             } else {
                 request.setAttribute("ERROR", "This action is not support");
             }

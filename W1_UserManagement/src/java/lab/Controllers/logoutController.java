@@ -7,25 +7,18 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import lab.DTOs.DTOpromotion;
-import lab.DTOs.errorObj;
-import lab.nghiaBean.processBean;
 
 /**
  *
  * @author nhoxq
  */
-public class editPromotionListController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "promotion.jsp";
-    private static final String FORM = "editPromotion.jsp";
+public class logoutController extends HttpServlet {
+    private static final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,55 +32,13 @@ public class editPromotionListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = LOGIN;
         try {
             HttpSession session = request.getSession();
-            String acion = request.getParameter("action");
-            if (acion.equals("Edit Promotion")) {
-                String userID = request.getParameter("txtUserID");
-                processBean bean = new processBean();
-                bean.setUserID(userID);
-                DTOpromotion dto = bean.getPromotion();
-                session.setAttribute("PROMOTION", dto);
-                url = FORM;
-            } else if (acion.equals("Edit")) {
-                DTOpromotion dto = (DTOpromotion) session.getAttribute("PROMOTION");
-                String rank = request.getParameter("txtRank");
-                String regex = "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
-                boolean valid = true;
-                errorObj err = new errorObj();
-                
-                if (rank.matches(regex) == false) {
-                    valid = false;
-                    err.setRankError("Rank must be number!");
-                } else if (Double.parseDouble(rank) > 10 || Double.parseDouble(rank) < 1) {
-                    valid = false;
-                    err.setRankError("Rank has value from 1 to 10!");
-                }
-
-                if (valid) {
-                    processBean bean = new processBean();
-                    bean.setUserID(dto.getUserID());
-                    bean.setRank(rank);
-                    boolean check = bean.editPromotion();
-                    if (check) {
-                        url = SUCCESS;
-                        List<DTOpromotion> list = bean.loadPromotionList();
-                        request.setAttribute("LIST_PROMO", list);
-                        session.removeAttribute("PROMOTION");
-                    } else {
-                        log("Error at bean edit promo");
-                    }
-                } else {
-                    url = FORM;
-                    request.setAttribute("INVALID", err);
-                }
-
-            }
-
+            session.removeAttribute("WELCOME");
         } catch (Exception e) {
-            request.setAttribute("ERROR", "Some Thing wrong in remove promotion funtion! Please contact developer.");
-            log("Error at EditPromotionList: " + e.getMessage());
+            request.setAttribute("ERROR", "Some Thing wrong in Login funtion! Please contact developer.");
+            log("Error at logout: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
