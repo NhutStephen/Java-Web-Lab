@@ -111,7 +111,7 @@
                                         <form action="MainController" method="POST">
                                             <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                            <input type="<%= type1%>" name="action" value="Delete">
+                                            <input type="<%= type1%>" name="action" value="Delete User">
                                         </form>
                                             
                                         <form action="MainController" method="POST">

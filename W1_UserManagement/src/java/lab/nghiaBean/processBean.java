@@ -23,12 +23,20 @@ public class processBean implements Serializable {
     private String photo;
     private String roleID;
     private String status;
+    private String rank;
     private DTOuser user;
     private DTOrole DTOrole;
     private DTOpromotion DTOpromotion;
     
     private String find;
-    
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
 
     public String getUserID() {
         return userID;
@@ -272,5 +280,10 @@ public class processBean implements Serializable {
         DTOpromotion dto = dao.getPromotion(userID);
         dto.setUsername(dao.takeUsername(userID));
         return dto;
+    }
+    
+    public boolean editPromotion() throws ClassNotFoundException, SQLException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.updatePromotion(userID, rank);
     }
 }
