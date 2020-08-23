@@ -71,11 +71,11 @@ public class loginController extends HttpServlet {
                 } else if (role.equals("admin")) {
                     url = ADMIN;
                     List<DTOuser> listUser = bean.getAllUser();
-                    request.setAttribute("WELCOME", welcome);
+                    session.setAttribute("WELCOME", welcome);
                     request.setAttribute("LIST", listUser);
                 } else if (role.equals("sub")) {
                     url = USER;
-                    request.setAttribute("WELCOME", welcome);
+                    session.setAttribute("WELCOME", welcome);
                 } else {
                     request.setAttribute("ERROR", "Wrong username or password");
                 }

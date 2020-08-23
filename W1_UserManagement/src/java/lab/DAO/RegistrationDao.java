@@ -309,14 +309,13 @@ public class RegistrationDao implements Serializable{
     public boolean assignPromotion(DTOpromotion dtoPromotion) throws SQLException, ClassNotFoundException {
         boolean check = false;
         try {
-            String sql = "insert into TBLpromotion (userID, promotionID, rank, dateAssign, status) values (?,?,?,?,?)";
+            String sql = "insert into TBLpromotion (userID, rank, dateAssign, status) values (?,?,?,?)";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
             stm.setString(1, dtoPromotion.getUserID());
-            stm.setString(2, dtoPromotion.getPromotionID());
-            stm.setString(3, dtoPromotion.getRank());
-            stm.setString(4, dtoPromotion.getDateAssign());
-            stm.setString(5, dtoPromotion.getStatus());
+            stm.setString(2, dtoPromotion.getRank());
+            stm.setString(3, dtoPromotion.getDateAssign());
+            stm.setString(4, dtoPromotion.getStatus());
             check = stm.executeUpdate() > 0;
         } finally {
             closeConnection();
