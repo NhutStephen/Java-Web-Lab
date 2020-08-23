@@ -34,6 +34,8 @@
                                 <div class="search-box">
                                     <i class="material-icons">&#xE8B6;</i>
                                     <form action="MainController" method="POST">
+                                        <input type="text" name="txtSearchUser" placeholder="Search Username"/>
+                                        <input type="submit" name="action" value="Search User"/>
                                         <select name="txtRoleID">
                                             <%
                                                 String role = request.getParameter("txtRole");
@@ -43,7 +45,7 @@
                                                 if (role != null) {
                                                     if (role.equals("0")) {
                                                         selectAll = "selected";
-                                                    }else if (role.equals("1")) {
+                                                    } else if (role.equals("1")) {
                                                         selectAdmin = "selected";
                                                     } else {
                                                         selectUser = "selected";
@@ -54,7 +56,6 @@
                                             <option value="1" <%= selectAdmin%>>Admin</option>
                                             <option value="2" <%= selectUser%>>User</option>
                                         </select><br>
-                                        <input type="text" name="txtSearchUser" placeholder="Search Username"/><input type="submit" name="action" value="Search User"/>
                                     </form>
                                 </div>
                             </div>
@@ -67,7 +68,6 @@
                             //if (listUser.size() > 0) {
 
                     %>
-
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
@@ -81,7 +81,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <%                        for (DTOuser user : listUser) {
+                        <%                            for (DTOuser user : listUser) {
                         %>
                         <tbody>
                             <tr>
@@ -93,10 +93,11 @@
                                 <td><%= user.getRole()%></td>
                                 <td><%= user.getStatus()%></td>
                                 <td>
+                                    
                                     <form action="MainController" method="POST">
                                         <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                         <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                        <input type="submit" name="action" value="Delete User"/>
+                                        <input type="submit" name="action" value="Delete">
                                     </form>
                                     <form action="MainController" method="POST">
                                         <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
@@ -118,18 +119,6 @@
                     <%
                         }
                     %>
-                    <!--<div class="clearfix">
-                             <<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                             <ul class="pagination">
-                                 <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                                 <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                 <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                 <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                                 <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                 <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                 <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                             </ul>
-                         </div>-->
                 </div>
             </div>
         </div>

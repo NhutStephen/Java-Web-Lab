@@ -13,10 +13,6 @@ import lab.DTOs.DTOpromotion;
 import lab.DTOs.DTOrole;
 import lab.DTOs.DTOuser;
 
-/**
- *
- * @author nhoxq
- */
 public class processBean implements Serializable {
 
     private String userID;

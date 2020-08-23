@@ -16,10 +16,6 @@ import lab.DTOs.DTOuser;
 import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
-/**
- *
- * @author nhoxq
- */
 public class insertController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
