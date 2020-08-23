@@ -115,6 +115,9 @@
                         <div class="container-login100-form-btn">
                             <input class="login100-form-btn" type='submit' value="Logout" name="action">
                         </div>
+                        <div>
+                            <a href="promotion.jsp">Go to your promotion's list in here</a>
+                        </div>
                     </div> 
                     <%
                         //}
