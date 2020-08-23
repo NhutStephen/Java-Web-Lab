@@ -36,6 +36,14 @@
         <servlet-name>updateController</servlet-name>
         <servlet-class>lab.Controllers.updateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>assignPromotionList</servlet-name>
+        <servlet-class>lab.Controllers.assignPromotionList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>assignPromotionListController</servlet-name>
+        <servlet-class>lab.Controllers.assignPromotionListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>updateController</servlet-name>
         <url-pattern>/updateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>assignPromotionList</servlet-name>
+        <url-pattern>/assignPromotionList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>assignPromotionListController</servlet-name>
+        <url-pattern>/assignPromotionListController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

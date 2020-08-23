@@ -26,18 +26,15 @@
                             </span>
 
                             <%
-                                DTOuser user = (DTOuser) request.getAttribute("USER");
+                                DTOuser user = (DTOuser) session.getAttribute("USER");
                             %>
                             
                             <div class="wrap-input100">
-                                <input class="input100" type="text" name="txtUsername" value="<%= user.getUsername()%>" placeholder="Username" readonly/>
+                                <input class="input100" type="text" name="txtUsername" value="<%= user.getUsername()%>" readonly/>
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
                                     <i class="fa fa-envelope" aria-hidden="true"></i>
                                 </span>
-                                <font color="red" style="font-style: italic">
-                                ${requestScope.INVALID.usernameError}
-                                </font><br/>
                             </div>
 
                             <div class="wrap-input100">

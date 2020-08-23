@@ -79,6 +79,7 @@
                                     <th>Phone</th>
                                     <th>Role</th>
                                     <th>Status</th>
+                                    <th>Promotion</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -93,6 +94,8 @@
                                     <td><%= user.getPhone()%></td>
                                     <td><%= user.getRole()%></td>
                                     <td><%= user.getStatus()%></td>
+                                    <%--add promotion status--%>
+                                    <td><%= user.getPromotionStatus()%></td>
                                     <td>
 
                                         <form action="MainController" method="POST">
@@ -105,6 +108,17 @@
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
                                             <input type="submit" name="action" value="Edit User"/>
                                         </form>
+                                        <%
+                                            String type = "submit";
+                                            if (user.getPromotionStatus().equals("Joining")) {
+                                                type = "hidden";
+                                            }
+                                        %>
+                                        <form action="MainController" method="POST">
+                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
+                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
+                                            <input type="<%= type%>" name="action" value="Assign to Promotion"/>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -116,7 +130,7 @@
                             <input class="login100-form-btn" type='submit' value="Logout" name="action">
                         </div>
                         <div>
-                            <a href="promotion.jsp">Go to your promotion's list in here</a>
+                            <a href="MainController?action=LoadPromotionList">Go to your promotion's list in here</a>
                         </div>
                     </div> 
                     <%
