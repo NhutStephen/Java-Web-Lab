@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="profile-img">
-                                        <img src="${requestScope.WELCOME.photo}" height="550px" width="550px"/>
+                                        <img src="${sessionScope.WELCOME.photo}" height="550px" width="550px"/>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -29,7 +29,7 @@
                                                     <label style="font-weight: bold">User Name</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <label>${requestScope.WELCOME.username}</label>
+                                                    <label>${sessionScope.WELCOME.username}</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -37,7 +37,7 @@
                                                     <label style="font-weight: bold">Email</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <label>${requestScope.WELCOME.email}</label>
+                                                    <label>${sessionScope.WELCOME.email}</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -45,12 +45,14 @@
                                                     <label>Phone</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <label>${requestScope.WELCOME.phone}</label>
+                                                    <label>${sessionScope.WELCOME.phone}</label>
                                                 </div> 
                                             </div>
                                             <div>
                                                 <div class="container-login100-form-btn">
-                                                    <input class="login100-form-btn" type='submit' value="Logout" name="action">
+                                                    <form action="MainController" method="POST">
+                                                        <input class="login100-form-btn" type='submit' value="Logout" name="action">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

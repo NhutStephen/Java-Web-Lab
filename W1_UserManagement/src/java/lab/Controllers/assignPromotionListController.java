@@ -43,7 +43,6 @@ public class assignPromotionListController extends HttpServlet {
             processBean bean = new processBean();
             bean.setUsername(username);
             String userID = bean.takeUserID();
-            String promotionID = "pro1";
             String rank = "5.0";
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -51,7 +50,7 @@ public class assignPromotionListController extends HttpServlet {
             String dateAssign = formatter.format(date);
             String status = "joining";
 
-            DTOpromotion dto = new DTOpromotion(promotionID, rank, dateAssign, status, userID);
+            DTOpromotion dto = new DTOpromotion(rank, dateAssign, status, userID);
             bean.setDTOpromotion(dto);
             boolean check = bean.assignPromotion();
             if (check) {

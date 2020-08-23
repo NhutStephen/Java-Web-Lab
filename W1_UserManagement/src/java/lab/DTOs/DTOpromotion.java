@@ -15,8 +15,7 @@ public class DTOpromotion implements Serializable{
     private String userID;
     private String username;
 
-    public DTOpromotion(String promotionID, String rank, String dateAssign, String status, String userID) {
-        this.promotionID = promotionID;
+    public DTOpromotion(String rank, String dateAssign, String status, String userID) {
         this.rank = rank;
         this.dateAssign = dateAssign;
         this.status = status;
