@@ -199,4 +199,21 @@ public class processBean implements Serializable {
         RegistrationDao dao = new RegistrationDao();
         return dao.checkUserExist(username) != null;
     }
+    
+////////////////////////////update user/////////////////////////////////////////
+    
+    public boolean deleteUser() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.deleteUser(username);
+    }
+    
+    public boolean updateUser() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.updateUser(username, email, phone, roleID);
+    }
+    
+    public DTOuser getUsertoUPdate() throws ClassNotFoundException, SQLException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.getUsertoUpdate(username);
+    }
 }

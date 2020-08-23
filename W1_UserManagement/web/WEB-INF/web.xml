@@ -28,6 +28,14 @@
         <servlet-name>searchUserController</servlet-name>
         <servlet-class>lab.Controllers.searchUserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteUserController</servlet-name>
+        <servlet-class>lab.Controllers.deleteUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateController</servlet-name>
+        <servlet-class>lab.Controllers.updateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>searchUserController</servlet-name>
         <url-pattern>/searchUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteUserController</servlet-name>
+        <url-pattern>/deleteUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateController</servlet-name>
+        <url-pattern>/updateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

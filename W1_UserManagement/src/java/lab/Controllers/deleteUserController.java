@@ -7,23 +7,24 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lab.DTOs.DTOuser;
+import lab.nghiaBean.processBean;
 
-public class MainController extends HttpServlet {
-
+/**
+ *
+ * @author nhoxq
+ */
+public class deleteUserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
-
-    private static final String LOGIN = "loginController";
-    private static final String INSERT = "insertController";
-    private static final String INSERT_FORM = "insert.jsp";
-    private static final String ADD_AVATAR = "addAvatarController";
-
-    private static final String SEARCH = "searchUserController";
-    private static final String DELETE_USER = "deleteUserController";
-    private static final String UPDATE_USER = "updateController";
+    private static final String SUCCESS = "search.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,32 +36,22 @@ public class MainController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            log(action);
-            if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Create a new account")) {
-                url = INSERT_FORM;
-            } else if (action.equals("Create")) {
-                url = INSERT;
-            } else if (action.equals("uploadImage")) {
-                url = ADD_AVATAR;
-            } else if (action.equals("Search User")) {
-                url = SEARCH;
-            } else if (action.equals("Delete User")) {
-                url = DELETE_USER;
-            } else if (action.equals("Edit User") || action.equals("Update User")) {
-                url = UPDATE_USER;
-            } else {
-                request.setAttribute("ERROR", "This action is not support");
+            String username = request.getParameter("txtUsername");
+            processBean bean = new processBean();
+            bean.setUsername(username);
+            boolean check = bean.deleteUser();
+            if (check) {
+                List<DTOuser> listUser = bean.getAllUser();
+                request.setAttribute("LIST", listUser);
+                url = SUCCESS;
             }
-        } catch (Exception e) {
-            request.setAttribute("ERROR", "Some Thing wrong in Main funtion! Please contact developer.");
-            log("Error at mainController: " + e.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            request.setAttribute("ERROR", "Some Thing wrong in Delete funtion! Please contact developer.");
+            log("Error at delete: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -78,7 +69,11 @@ public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(deleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -92,7 +87,11 @@ public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(deleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

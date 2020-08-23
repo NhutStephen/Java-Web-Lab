@@ -267,23 +267,41 @@ public class RegistrationDao implements Serializable{
         return check;
     }
     
-    public boolean updateUser(DTOuser user) throws SQLException, ClassNotFoundException {
+    public boolean updateUser(String username, String email, String phone, String roleID) throws SQLException, ClassNotFoundException {
         boolean check = false;
         try {
-            String sql = "update TBluser (username, password, email, phone, roleID) values (?,?,?,?,?) where userID = ?";
+            String sql = "update TBluser set email = ?, phone = ?, roleID = ? where username = ?";
             con = MyConnection.makeConnection();
             stm = con.prepareStatement(sql);
-            stm.setString(1, user.getUsername());
-            stm.setString(2, user.getPassword());
-            stm.setString(3, user.getEmail());
-            stm.setString(4, user.getPhone());
-            stm.setString(5, user.getRoleID());
-            stm.setString(6, user.getUserID());
+            stm.setString(1, email);
+            stm.setString(2, phone);
+            stm.setString(3, roleID);
+            stm.setString(4, username);
             check = stm.executeUpdate() > 0;
         } finally {
             closeConnection();
         }
         return check;
+    }
+    
+    public DTOuser getUsertoUpdate(String username) throws ClassNotFoundException, SQLException {
+        DTOuser user = new DTOuser();
+        try {
+            String sql = "select username, email, phone, roleID from TBLuser where username = ?";
+            con = MyConnection.makeConnection();
+            stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            if(rs.next()) {
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setRoleID(rs.getString("roleID"));
+            }
+        } finally {
+            closeConnection();
+        }
+        return user;
     }
     
     public boolean assignPromotion(DTOpromotion dtoPromotion) throws SQLException, ClassNotFoundException {
