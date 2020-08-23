@@ -6,7 +6,15 @@
 package lab.DTOs;
 
 public class errorObj {
-    private String usernameError, passwordError, emailError, phoneError, photoError, limitPromotionError, confirmError;
+    private String usernameError, passwordError, emailError, phoneError, photoError, limitPromotionError, confirmError, rankError;
+
+    public String getRankError() {
+        return rankError;
+    }
+
+    public void setRankError(String rankError) {
+        this.rankError = rankError;
+    }
 
     public String getConfirmError() {
         return confirmError;

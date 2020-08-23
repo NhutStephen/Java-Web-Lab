@@ -7,12 +7,14 @@ package lab.Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lab.DTOs.DTOpromotion;
+import lab.DTOs.errorObj;
 import lab.nghiaBean.processBean;
 
 /**
@@ -49,8 +51,37 @@ public class editPromotionListController extends HttpServlet {
                 session.setAttribute("PROMOTION", dto);
                 url = FORM;
             } else if (acion.equals("Edit")) {
-                String userID = request.getParameter("txtUserID");
-                
+                DTOpromotion dto = (DTOpromotion) session.getAttribute("PROMOTION");
+                String rank = request.getParameter("txtRank");
+                String regex = "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
+                boolean valid = true;
+                errorObj err = new errorObj();
+                if (Double.parseDouble(rank) > 10 || Double.parseDouble(rank) < 1) {
+                    valid = false;
+                    err.setRankError("Rank has value from 1 to 10!");
+                } else if (rank.matches(regex) == false) {
+                    valid = false;
+                    err.setRankError("Rank must be number!");
+                }
+
+                if (valid) {
+                    processBean bean = new processBean();
+                    bean.setUserID(dto.getUserID());
+                    bean.setRank(rank);
+                    boolean check = bean.editPromotion();
+                    if (check) {
+                        url = SUCCESS;
+                        List<DTOpromotion> list = bean.loadPromotionList();
+                        request.setAttribute("LIST_PROMO", list);
+                        session.removeAttribute("PROMOTION");
+                    } else {
+                        log("Error at bean edit promo");
+                    }
+                } else {
+                    url = FORM;
+                    request.setAttribute("INVALID", err);
+                }
+
             }
 
         } catch (Exception e) {

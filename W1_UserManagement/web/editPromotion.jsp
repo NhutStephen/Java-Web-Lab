@@ -17,6 +17,8 @@
             <input type="text" name="txtUsername" value="${sessionScope.PROMOTION.username}" readonly="readonly" /><br>
             <label>Rank </label>
             <input type="text" name="txtRank" value="${sessionScope.PROMOTION.rank}"/><br>
+            <font color="red" style="font-style: italic">
+            ${requestScope.INVALID.rankError}</font><br/>
             <input type="submit" value="Edit" name="action" />
         </form>
     </body>
