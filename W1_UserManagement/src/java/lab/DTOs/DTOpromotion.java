@@ -13,6 +13,7 @@ public class DTOpromotion implements Serializable{
     private String dateAssign;
     private String status;
     private String userID;
+    private String username;
 
     public DTOpromotion(String promotionID, String rank, String dateAssign, String status, String userID) {
         this.promotionID = promotionID;
@@ -20,6 +21,17 @@ public class DTOpromotion implements Serializable{
         this.dateAssign = dateAssign;
         this.status = status;
         this.userID = userID;
+    }
+
+    public DTOpromotion() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPromotionID() {

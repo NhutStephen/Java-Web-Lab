@@ -97,23 +97,29 @@
                                     <%--add promotion status--%>
                                     <td><%= user.getPromotionStatus()%></td>
                                     <td>
-
-                                        <form action="MainController" method="POST">
-                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
-                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                            <input type="submit" name="action" value="Delete">
-                                        </form>
-                                        <form action="MainController" method="POST">
-                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
-                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
-                                            <input type="submit" name="action" value="Edit User"/>
-                                        </form>
                                         <%
                                             String type = "submit";
-                                            if (user.getPromotionStatus().equals("Joining")) {
+                                            String type1 = "submit";
+                                            if (user.getStatus().equals("inactive")) {
+                                                type1 = "hidden";
+                                                type = "hidden";
+                                            } else if (user.getPromotionStatus().equals("Joining")) {
                                                 type = "hidden";
                                             }
+                                            
                                         %>
+                                        <form action="MainController" method="POST">
+                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
+                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
+                                            <input type="<%= type1%>" name="action" value="Delete">
+                                        </form>
+                                            
+                                        <form action="MainController" method="POST">
+                                            <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
+                                            <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>
+                                            <input type="<%= type1%>" name="action" value="Edit User"/>
+                                        </form>
+                                        
                                         <form action="MainController" method="POST">
                                             <input type="hidden" name="txtUsername" value="<%= user.getUsername()%>"/>
                                             <input type="hidden" name="txtSearchUser" value="${param.txtSearchUser}"/>

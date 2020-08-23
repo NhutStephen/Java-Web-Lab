@@ -252,4 +252,25 @@ public class processBean implements Serializable {
         RegistrationDao dao = new RegistrationDao();
         return dao.getUserID(username);
     }
+    
+    public List<DTOpromotion> loadPromotionList() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        List<DTOpromotion> list = dao.loadPromotionList();
+        for (DTOpromotion dto : list) {
+            dto.setUsername(dao.takeUsername(dto.getUserID()));
+        }
+        return list;
+    }
+    
+    public boolean removePromo() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        return dao.removePromotion(userID);
+    }
+    
+    public DTOpromotion getPromotion() throws SQLException, ClassNotFoundException {
+        RegistrationDao dao = new RegistrationDao();
+        DTOpromotion dto = dao.getPromotion(userID);
+        dto.setUsername(dao.takeUsername(userID));
+        return dto;
+    }
 }
