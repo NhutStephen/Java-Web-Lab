@@ -43,7 +43,7 @@
                                                 if (role != null) {
                                                     if (role.equals("0")) {
                                                         selectAll = "selected";
-                                                    }else if (role.equals("1")) {
+                                                    } else if (role.equals("1")) {
                                                         selectAdmin = "selected";
                                                     } else {
                                                         selectUser = "selected";
