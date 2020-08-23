@@ -48,6 +48,11 @@
                                                     <label>${requestScope.WELCOME.phone}</label>
                                                 </div> 
                                             </div>
+                                            <div>
+                                                <div class="container-login100-form-btn">
+                                                    <input class="login100-form-btn" type='submit' value="Logout" name="action">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
